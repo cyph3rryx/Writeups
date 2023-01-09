@@ -1,0 +1,682 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Bandit Wargames Writeups</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f4db9668-fd0d-42cc-9cdd-292ef5dd8a33" class="page sans"><header><h1 class="page-title">Bandit Wargames Writeups</h1></header><div class="page-body"><p id="51cd4f3b-60bf-4939-ada9-7ce1d72ac521" class="">
+</p><p id="cf47f078-96c1-4131-ad4d-34504ecc3e53" class="">Hey ya guys! I am Ryx and today we are going to do some great basic Linux terminal hacking with the wargame known as Bandit Wargames from <a href="https://overthewire.org/wargames/bandit/">OverTheWire</a></p><p id="719b410b-6028-4552-a0f3-36fd2168e3ff" class="">
+</p><p id="20238ab1-99ce-431f-b13f-697c2d6b9115" class="">So this will be the brief walkthrough through each and every level so that if you get stuck in-between at any step then you can check this article for help. I am going to do a walkthrough video series too and I will update you with the link down below but before that lets jump into the first source level.</p><p id="77184f36-a7bf-4f71-a0f3-c91163ee19f6" class="">
+</p><h1 id="1a854bed-dfb0-4b07-bd34-9762ad2c6e1a" class="">Source level-Level 1:</h1><p id="c6e0f92b-510e-4e23-8ba5-dbff8c634a41" class="">The goal of this level is for you to log into the game using SSH. The host to which you need to connect is bandit.labs.overthewire.org, on port 2220. The username is bandit0 and the password is bandit0. Once logged in, go to the Level 1 page to find out how to beat Level 1.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="908fc9c2-01bb-4813-83ad-4e3f987a2b8a"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>First thought</strong>: Well lets search the terms and read the articles. So we can know what is SSH(secure shell) and how to connect to it.</div></figure><p id="1cf6c687-9919-4ddb-8e0b-3e7a04109b84" class=""><span style="border-bottom:0.05em solid"><strong>Explanation</strong></span>: We can connect to ssh server with the following command:</p><pre id="f924efe2-19b8-4e54-b3f1-0610eadf0618" class="code"><code> ssh bandit0@bandit.labs.overthewire.org -p 2220</code></pre><p id="1124f0d8-1bb6-4a7b-b161-773e17f7f1ed" class="">The password is bandit0 so then we can enter the shell and then we can use ls to list out the files in the directory and we get ‘readme’ file so we cat it by using ‘cat readme’ and we get the first pass for badnit1</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ba0d29dc-fc5d-48d8-9beb-79a85f3205f4"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">boJ9jbbUNNfktd78OOpsqOltutMc3MY1 bandit1 lv0</div></figure><p id="464b0d18-9b4e-4717-8d03-515455f362b5" class="block-color-gray_background">Note: ‘cd’ to change directory , ‘ls’ to list the files in the directory , ‘cat’ to read the file data.</p><p id="46d84e47-9778-4ad8-bac3-a7664c0d10e9" class="">
+</p><h1 id="219e8f7a-69e0-4d1d-b177-3eaf5ce99fc6" class="">Level 1-&gt;2 :</h1><p id="2bb003ef-0c5b-4aa8-ab74-3bd3519f0719" class="">We have, the password for the next level is stored in a file called – located in the home directory</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8172d649-7ee9-4fe9-b115-55aabe212196"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>First though</strong>t: we need to just dive into the home directory by using ‘cd ..’ and then we can see the files in the home directory.</div></figure><p id="6221f235-70fb-4226-ace8-fa57825066e4" class=""><span style="border-bottom:0.05em solid"><strong>Explanation</strong></span>: By using ‘<em>ls -al</em>’ command we can see the permissions and files located and then we can execute ‘<em>cat ./-</em>’ and we can have our password.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1671ff49-92ad-458c-985f-dcc52755f23a"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9 bandit2 lv1</div></figure><p id="3e0229b6-9b6e-411a-9c22-3293bb8cf7e4" class="">
+</p><h1 id="1340ad3c-059c-4c49-be39-2704f7654bce" class="">Level 2-&gt;3:</h1><p id="3523a5c0-a2ae-4e74-81f6-20a4b6105063" class="">We have, the password for the next level is stored in a file called spaces in this filename located in the home directory</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b5c4805b-0b28-434a-8435-03fdcc1c5891"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>First thought:</strong> We need to just cat ‘spaces in this filename’ and retrieve the file.</div></figure><p id="30d72abc-29db-4169-aa00-f718e896d6f3" class=""><strong><span style="border-bottom:0.05em solid">Explanation:</span></strong> Well absolutely correct we can just do ‘<em>cd ..</em>’ and then use </p><p id="dd157d13-4cdf-41dd-9169-66830ea7f1bf" class="">‘<em>cat spaces\ in\ this \filename</em>’ </p><p id="bb73c590-f125-4548-8e83-177b9cffe894" class="">(just write ‘cat spaces’ and hit enter) and we get our password.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="60c5aedb-ba53-418a-b7f2-06de1400dffc"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK bandit3 lv2</div></figure><h1 id="0a13e41b-f3c1-496b-b567-df97ad29eb75" class=""><strong>Level 3-&gt;4:</strong></h1><p id="0edb98cb-e077-437e-b6a5-dd457cd8c1cd" class="">We have, the password for the next level is stored in a hidden file in the inhere directory.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ea86f18d-2a25-4272-88fb-155d1d75d7f8"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>First thought</strong>: We will try ‘cd ..’ to go into the home directory and ‘ls -al’ to see the hidden files.</div></figure><p id="1e2100c6-0189-4219-a691-d7ba6e9a42f7" class=""><strong><span style="border-bottom:0.05em solid">Explanation</span></strong>: Well yeah we will do the same but we can forget going in home directory instead go directly to ‘inhere’ through ‘cd inhere’ and directly execute ‘<em>ls -al</em>’ and then we can see a ‘.hidden’ file and we can simply cat it out by using ‘<em>cat .hidden</em>’ and boom we got our password.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="48c112d1-6d9d-4f8e-a2ec-6c26d618ef4a"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">pIwrPrtPN36QITSp3EQaw936yaFoFgAB bandit4 lv3</div></figure><h1 id="06e8b548-3811-47a5-b227-4a1a81e03c2a" class=""><strong>Level 4-&gt;5:</strong></h1><p id="15a39d98-6fab-423b-9e73-1614657bbfd4" class="">We have, the password for the next level is stored in the only human-readable file in the inhere directory.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="24930ddd-a2a6-4cbc-9b53-289778cad48c"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>First thought: </strong>We can just search what does the ‘du’ command do and then execute ahead.</div></figure><p id="efeb193f-2952-4907-8d09-9013d5039421" class=""><strong><span style="border-bottom:0.05em solid">Explanation</span></strong>: Well du command, short for disk usage, is used to estimate file space usage. </p><ul id="8c4e0398-ebc4-46b0-8822-4766a2bd5763" class="bulleted-list"><li style="list-style-type:disc">The du command can be used to track the files and directories which are consuming excessive amount of space on hard disk drive.</li></ul><ul id="3cc6a2f5-a138-4d7a-a1e6-3f0c11b38326" class="bulleted-list"><li style="list-style-type:disc">So first we will do same steps as above where we will go in ‘inhere’ directory and see the files using ‘ls’ and then to find the human readable file we will try to open up every file by using ‘cat -file01&#x27; and whichever is human readable it is the password for next level.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="358b191a-fbd6-4820-bd9d-72300e2b3230"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">koReBOKuIDDepwhWk7jZC0RTdopnAYKh bandit5 lv4</div></figure><h1 id="efcef3ae-a004-49af-83fa-d9c347421b4f" class="">Level 5-&gt;6:</h1><p id="67470245-a404-4539-b9c8-53a3744490b3" class="">The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:</p><p id="19788446-8581-45a1-9e18-5caef5d571d7" class=""><em>human-readable,1033 bytes in size,not executable</em></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="60414c86-b157-41f1-a948-e8292c58a50a"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>First thought</strong>: So we have to go in inhere directory and then check for human readable file and with du command we can see the file size and it must not be executable.</div></figure><p id="4e1cbd7a-3fdc-42b6-81ce-4dcb14285414" class=""><span style="border-bottom:0.05em solid"><strong>Explanation:</strong></span> Well we can use ‘find’ command here for a ez clap.</p><p id="0b7a44aa-8254-4f9c-9a58-fa4f0316e511" class="">After some searching on google I found out that if you want to find a specific file whose size is mentioned then use ‘find -size &lt;size&gt;’ for bytes we use ‘c’ keyword and we can even see if its executable or not by appending ‘!-executable’ with the file command. </p><p id="a5a90a59-ea78-45e3-8b33-c74e7a57ce4e" class="">So final command will be: </p><p id="a5c01a8b-c6f6-45c9-9fd5-372101606007" class=""><em>find . -size 1033c ! -executable</em></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f3b4a1e8-72ef-43fa-96a6-9252fbc59fd7"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">DXjZPULLxYr17uwoI01bNLQbtFemEgo7 bandit6 lv5</div></figure><h1 id="33f7021c-76fd-407a-a1d7-d0fd1a04eb01" class="">Level 6-&gt;7:</h1><p id="cec8f50f-ae34-4cfd-aa0f-7b51511ded22" class="">The password for the next level is stored somewhere on the server and has all of the following properties:</p><p id="80859ae0-dbf5-44ef-b5f8-25490b2ce459" class=""><em>owned by user bandit7</em></p><p id="7d5cee80-7419-4c27-b22c-45ae6d75fb10" class=""><em>owned by group bandit6</em></p><p id="4d38bd73-2459-4824-beb1-d7d415c0db7e" class=""><em>33 bytes in size</em></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="23fdd357-d1bc-45fa-a4ab-0bd9a2bd7645"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>First thought: </strong>Dig more about find command and use it here.</div></figure><p id="a01e7a24-674d-47bf-878b-14f9c4e81d62" class=""><span style="border-bottom:0.05em solid"><strong>Explanation:</strong></span> So yeah after more digging we can actually use this command: </p><p id="52e454b0-1da9-434a-9c3e-6becda3891a4" class="">’<em>find ./ -type f -user bandit7 -group bandit6</em>&#x27; </p><p id="f3cc9fa2-7adc-4285-8f2d-07c665cdc4ad" class="">and boom we get our password file and you can cat it and read the passcode</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e373490f-c336-42cb-be9a-0d97e8779ce1"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs bandit7 lv6</div></figure><h1 id="6786f8ad-5055-43b0-92f0-ef3e402e3618" class="">Level 7-&gt;8</h1><p id="05f1fb1b-c39e-4682-a1e3-4d5a29037566" class="">The password for the next level is stored in the file data.txt next to the word millionth</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2e6a31a8-fe09-4694-80b4-baabf3dd07b7"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>First thought:</strong> Well search for all the commands given in help section to know more.</div></figure><ul id="7334f55c-d8c5-4a7c-b892-f5fe37b195e8" class="toggle"><li><details open=""><summary><span style="border-bottom:0.05em solid">grep:</span></summary><p id="6bf7d753-eb24-4404-be59-de9295dac5fe" class="">The grep filter searches a file for a particular pattern of characters, and displays all lines that contain that pattern. The pattern that is searched in the file is referred to as the regular expression</p></details></li></ul><p id="c103852f-a31a-4687-a9e8-f92506def558" class=""><strong><span style="border-bottom:0.05em solid">Explanation:</span></strong> </p><ul id="6148b9cc-31c1-460d-af3a-151d93d2e228" class="bulleted-list"><li style="list-style-type:disc">Well we can use several commands like while searching everything I get to know about ‘<em>egrep</em>’ command which treats the pattern as an extended regular expression and prints out the lines that match the pattern. </li></ul><ul id="2d749d85-a92c-4ab1-abc6-09c5f65ff46b" class="bulleted-list"><li style="list-style-type:disc">If there are several files with the matching pattern, it also displays the file names for each line. </li></ul><ul id="213d299d-4e70-49c3-91bb-d4d008f917a5" class="bulleted-list"><li style="list-style-type:disc">We want to see the word next to ‘millionth’ so we can use the command </li></ul><p id="a03266d8-7ccb-416f-b88b-087485e93ff8" class=""><em>egrep ‘millionth’ data.txt</em> </p><p id="0b0b21e4-bf1f-406e-bb2e-5f03b2cec1ca" class="">and hit enter and boom we get our password!</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6d73f9f7-23b0-44f1-a100-8e985afd6d97"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">cvX2JJa4CFALtqS87jk27qwqGhBM9plV bandit8 lv7</div></figure><h1 id="4646d371-2b20-4d91-8dac-c158bb21c11b" class="">Level 8-&gt;9:</h1><p id="cc9a02ba-44e3-40d1-87f4-042121bc8642" class="">The password for the next level is stored in the file data.txt and is the only line of text that occurs only once</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ad6238d4-35ee-443b-b486-1dfffafb00d4"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>First thought: </strong>Well we can use ‘<em>uniq’</em> keyword given in help section. The uniq command in Linux is a command line utility that reports or filters out the repeated lines in a file.</div></figure><p id="08ae241d-ee4b-43b9-819d-7e591fd65fbc" class=""><span style="border-bottom:0.05em solid"><strong>Explanation:</strong></span> </p><ul id="aff0ef5a-46a0-43a4-b34f-9bc3a4bdeded" class="bulleted-list"><li style="list-style-type:disc">Well we have a unsorted data so lets just sort it via ‘sort data.txt’ and then execute ‘uniq -c’ to see the one unique line. </li></ul><ul id="0137fb42-0192-4293-85a2-8a2a6d1a195b" class="bulleted-list"><li style="list-style-type:disc">Here ‘-c’ will display the number of time the line is repeated so where ever we get 1 its the password. </li></ul><ul id="a959316d-741c-4492-b976-2e8fb993c57e" class="bulleted-list"><li style="list-style-type:disc">Well actually we can pipe both the command together and execute them at a same time. </li></ul><ul id="e93eda2f-cdb8-4202-98c9-e2440f10e46e" class="bulleted-list"><li style="list-style-type:disc">Piping can be done by using pipe operator ‘|’.</li></ul><p id="09c5b566-d819-4d38-9360-d4d0c60a369f" class="">The final command : ‘<em>sort data.txt | uniq -c</em>’</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f91f3867-429c-49e2-8a61-2a9740b2a618"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR bandit9 lv8</div></figure><h1 id="fbb0c96d-ef61-4960-a1c2-5a8c67f2debb" class="">Level 9-&gt;10:</h1><p id="3ccf0573-5f9f-4eb4-9191-2e1619e4d7cd" class="">The password for the next level is stored in the file data.txt in one of the few human-readable strings, preceded by several ‘=’ characters.</p><p id="96b4d84f-23fb-4f15-812d-33e6b2f4efb6" class=""><strong><span style="border-bottom:0.05em solid">Explanation: </span></strong></p><ul id="64dccc01-9f5a-4ab3-99f4-8905e24a9da8" class="bulleted-list"><li style="list-style-type:disc">Well we will use strings to see the human readable strings and then pipe it with = so we can see the password. </li></ul><p id="fadd4248-729b-4ddb-9017-3b86d4cf66c2" class="">Final command will be: </p><p id="d5566397-c826-44f1-8685-6c7354b8ef9c" class=""><em>strings data.txt | grep “=”</em></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e022c36a-5ba8-4d1c-b793-43ea3e08cb25"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk bandit10 lv9</div></figure><h1 id="76c8db9e-f900-4608-a8e1-b143b09f3ef1" class="">Level 10-&gt;11:</h1><p id="02003248-8e21-46e1-b2c5-3389f9dd9a2f" class="">The password for the next level is stored in the file data.txt, which contains base64 encoded data</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3c84a0db-a2d5-4eb5-9781-f9db6669a4e3"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>First thought:</strong> We can just get that data out and convert it from base64 to plain from any online converter.</div></figure><p id="0a491359-6a4b-4942-b471-68298d87eec9" class=""><strong><span style="border-bottom:0.05em solid">Explanation</span></strong><span style="border-bottom:0.05em solid">:</span></p><ul id="d07edb91-0752-4b7b-b81f-a434ca3a1212" class="bulleted-list"><li style="list-style-type:disc">You can do that …its absolutely correct but what if we need to do it in terminal then we can use the following command :</li></ul><p id="5e64a1ab-d6a7-496a-8540-830ccb0ec5e3" class=""><em>echo ‘&lt;string&gt;’ | base64 – decode</em></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a79128d2-865d-4a75-80d4-e599d942985c"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR bandit11 lv10</div></figure><blockquote id="ef055017-ff78-4f68-b36e-dc134c970b31" class="block-color-gray_background"><strong>Note</strong>: If you wanna go more deep into knowing all the commands then you can use ‘<em>man</em>’ command(a Wikipedia inside terminal for any command) or can use google(recommended)</blockquote><h1 id="eae13281-3768-4ba2-8624-5e69ec151e64" class="">Level 11-&gt;12:</h1><p id="867468d4-5f9f-4ccb-902a-101420d3669d" class="">The password for the next level is stored in the file data.txt, where all lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2262ef74-acb9-4180-b901-8777491ec0bd"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>First thought: </strong>The change of 13 position indicates rot13 algorithm so we can cat the data and convert the data into plain text from online site.</div></figure><p id="02cf30af-e5a0-41f0-88e0-ba8f32b6c44b" class=""><span style="border-bottom:0.05em solid"><strong>Explanation: </strong></span></p><ul id="1cdbd24a-df01-4078-8ce8-02f5eb590241" class="bulleted-list"><li style="list-style-type:disc">Well we can do that thing and its absolutely correct. We can use the ‘tr’ command to use to decode it in terminal.</li></ul><p id="68d52dfe-5b1a-440e-8081-0af04b9eb81c" class="">Final command – </p><p id="1813d2e4-9660-4d44-8953-42fac20cf898" class=""><em>echo ‘Gur cnffjbeq vf 5Gr8L4qetPEsPk8htqjhRK8XSP6x2RHh’ | tr ‘A-Za-z’ ‘N-ZA-Mn-za-m’</em></p><ul id="d2534c5b-182f-4174-b0e4-0d815500311a" class="bulleted-list"><li style="list-style-type:disc">We can do this in rot13 to plain text converter too…but ‘tr’ command is used in terminal to do the same.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="334ace47-7e6c-4ac7-9baf-e55712152291"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu bandit12 lv11</div></figure><h1 id="d38de30a-2b14-457b-b31c-fa98e421d15c" class="">Level 12-&gt;13:</h1><p id="47148356-49b6-4d1d-be0e-cbce5b7be890" class="">The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed. </p><p id="cde9341c-e30c-4e83-bcd4-d10092487000" class="">For this level it may be useful to create a directory under /tmp in which you can work using mkdir. </p><p id="9690c7d6-0b0b-4cdb-81db-f22676d2019f" class="">For example: <em>mkdir /tmp/myname123</em>. Then copy the datafile using <em>cp</em>, and rename it using <em>mv</em>.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="4db7934a-d24d-4058-91d0-b0afc549a5d1"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>First thought: </strong>Well the question will be enough to understand the initiating thought.</div></figure><p id="94dabd8e-aa28-4c7a-902a-70fb4eb8e1ea" class=""><strong><span style="border-bottom:0.05em solid">Explanation:</span></strong> </p><ul id="e476c8a4-cf57-4e4f-81e6-6f1c60dcb6d7" class="bulleted-list"><li style="list-style-type:disc">Use of ‘<em>mkdir</em>’ to make directory, </li></ul><ul id="4c64c429-f310-48ef-b2f4-422f874d9118" class="bulleted-list"><li style="list-style-type:disc">‘<em>cp</em>’ to copy the file, ‘<em>mv</em>’ to rename the file, </li></ul><ul id="b783eff7-0707-49ea-a80d-807d3630e3df" class="bulleted-list"><li style="list-style-type:disc">‘<em>bzip2 -d &lt;file&gt;</em>’ to decompress the bz2 file, </li></ul><ul id="b5e054b7-b787-4e74-be33-85346b8ebf7a" class="bulleted-list"><li style="list-style-type:disc">‘<em>gzip2 -d &lt;file&gt;</em>’ to decompress the gz file, </li></ul><ul id="bf8013d8-b5cb-4479-af3d-8bc1dee7f88d" class="bulleted-list"><li style="list-style-type:disc">‘<em>tar xf &lt;file&gt;</em>’ to decompress the tar file. Its the loop of file compression and decompression so be patient and solve it easily.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7c9f73d3-c78e-4edd-a707-d9cd004c4011"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL bandit13 lv12</div></figure><h1 id="c9472896-f382-4021-a196-92be85a4aa8f" class="">Level 13-&gt;14:</h1><p id="42cdc083-6270-473d-a4d0-63ea2055e839" class="">We get an private SSH key which can only be accessible to bandit14 so we can use that to log in to the bandit14 SSH network.</p><p id="552627f2-c2d5-412d-87c3-f2b23cfd671a" class=""><strong><span style="border-bottom:0.05em solid">Explanation:</span></strong> </p><ul id="0c51bd19-bf2e-4813-94e9-664fcf3f6de5" class="bulleted-list"><li style="list-style-type:disc">SSH key is used to log in to the bandit14.(for more info you can google it)</li></ul><p id="dad2c245-d3b8-411b-9509-9d8016e57a71" class="">Command :<em> </em></p><p id="84c116f6-3e21-4380-9d3f-a54fdff8a0b5" class=""><em>ssh -i sshkey.private bandit14@localhost</em></p><ul id="a590abf3-b6fd-4749-becb-1e95b7c8f723" class="bulleted-list"><li style="list-style-type:disc">After logging in bandit14 you need to go into the directory mentioned in the question /etc/bandit_pass/bandit14 to see the password.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9b300790-1be6-4396-a5b4-7e5fc92acb0c"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e bandit14 lv13</div></figure><h1 id="c0def05d-ebe1-4a04-89e4-f81c9a7a0421" class=""><strong>Level 14-&gt;15:</strong></h1><p id="da56d89a-1f7b-4f07-9493-ef8090d813bb" class="">We have to submit our bandit14 password on local host 30000 port so that we can get the password for next level. </p><p id="9f34617e-cc59-4efe-8bfe-0d39ae6b9a40" class=""><strong><span style="border-bottom:0.05em solid">Explanation:</span></strong></p><ul id="91fff465-184e-44ff-a4a1-efb2b098cb57" class="bulleted-list"><li style="list-style-type:disc">I tried SSH command to connect to local host 30000 but as I didn’t had a key to go through it so the path was blocked so after searching something on internet, I got a solution.</li></ul><p id="17bfd616-133e-4b35-8b4b-0ef2d1f399d0" class="">Command : </p><p id="5e140909-05a2-4f08-a282-0791d339e258" class=""><em>‘nc localhost 30000</em>&#x27; </p><ul id="5460b72e-0133-4f34-a7ea-0cae00016f12" class="bulleted-list"><li style="list-style-type:disc">This will ask for your password to reveal the encrypted data on that host and guess what that data was the password for next level.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8a7abab3-55cb-4569-83f6-ea24ca2b6eb3"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">BfMYroe26WYalil77FoDi9qh59eK5xNr bandit15 lv14</div></figure><h1 id="b61f8c82-c4d8-4aaa-a9e7-a3af8cba15fa" class="">Level 15-&gt;16:</h1><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c7ab54a0-2f43-46ce-b703-f447b10d1f28"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>First Thought:</strong>  We have to submit our bandit15 password on localhost portnumber 30001 so that we can get the password for next level.</div></figure><p id="c4074649-ce2e-4777-8c9d-694a5156571a" class=""><span style="border-bottom:0.05em solid"><strong>Explanation:</strong></span></p><ul id="2434b0b7-c466-48f3-b30c-77a25fbfd4fe" class="bulleted-list"><li style="list-style-type:disc">I tried last level command of ‘nc localhost 30001&#x27; but it didn’t returned anything so I read the question again and it was said that use SSL encryption. So..</li></ul><ul id="2c3eba8a-894e-4097-b614-dbf27af950dc" class="bulleted-list"><li style="list-style-type:disc">I used the following command ‘<em>nc | grep ssl</em>’ but it returned cmd line and then dead end so watched a walkthrough on YT and they used</li></ul><p id="4fc1bea4-9621-47b3-bea1-00c9ba89d913" class="">Command: </p><p id="8599e567-fba2-40a6-a8d0-4ace698ec106" class="">‘<em>ncat – ssl localhost 30001</em>&#x27; </p><p id="1e12fcc2-9829-426d-986b-080c2c807a1d" class="">and then same method as last level.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6e02ebf7-a909-4fa2-81ad-f9f15b33a83f"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">cluFn7wTiGryunymYOu4RcffSxQluehd bandit16 lv15</div></figure><h1 id="f1c354c6-3e53-43f1-83b1-697584727211" class="">Level 16 -&gt;17:</h1><p id="ea5c130c-fde0-4e07-90af-da47e84eee7b" class="">We have to do some scanning. We have to scan port 31000 to 32000 on localhost server and we need to find that one port which speak SSL and returns back the pass. So several commands were used..</p><p id="554db15d-d2cc-487d-82b6-e6be65c16b8a" class="">Command </p><p id="ae9b0ac8-ae44-4edf-9bd6-b6a20ee357a0" class="">To scan the port 31000–32000:</p><p id="20cc3cfa-77d4-48ad-b82e-d9064141cba3" class=""><em>nmap localhost -p 31000–32000</em></p><ul id="a2df9c73-37a6-4314-a572-6406bc03ab4a" class="bulleted-list"><li style="list-style-type:disc">We get several ports which are open and we need to check each one using command : <em>ncat – ssl localhost &lt;port&gt;</em></li></ul><p id="8e0e2f61-4475-4625-bfcf-ed27a8cf8b32" class="">And whichever is fake will return same thing and one unique port 31790 will return you an SSH Private key.</p><p id="0198df28-4bb9-4388-a987-a1aec4270471" class="">Now when we get an SSH private key we can log in to bandit17 with this one but we need to store it first so we use command : </p><p id="9e2d341b-0ebd-4a08-8e1a-e802d6fd9524" class=""><em>cd /tmp</em></p><p id="f3837409-f2a5-4c3c-8964-f610e4d548f2" class="">to open the directory and then use</p><p id="092af34e-392d-45e1-a851-d612b7780a5c" class=""><em>touch pvt16.key </em></p><p id="9a206649-d0ea-40ca-a498-93a25460b5cd" class="">to create a file named pvt16.key. Then we use nano editor to edit that file.</p><ul id="4b7e5616-f561-4f7f-ad70-20f1328462b4" class="bulleted-list"><li style="list-style-type:disc">So we use: ‘nano pvt16.key’ to enter the nano editor and there we paste our key in that file and save the file using ‘CTRL+X’ and then if we need to use the key for the level pass then we need to change the permission so that it can be only accessed for that particular pass and to do that we need to see who had the permissions?</li></ul><p id="62b3c3c9-1818-49a1-9a3f-4a7ba1cb5fcd" class="">command to see the permission of the file: </p><p id="c397f5db-ad62-4bfd-b4fa-7ed9ca60654a" class=""><em>ls -l pvt16.key</em></p><p id="cec31c66-e888-409e-a358-688cd5917cdd" class="">and then after seeing the file permission we can change it using ‘<em>chmod</em>’ command : </p><p id="bad10c42-ee7d-489f-a1be-28c14e35ce6d" class=""><em>chmod 700 pvt16.key</em></p><ul id="510ac39b-e37a-4b87-8083-32cbf505fbf5" class="bulleted-list"><li style="list-style-type:disc">Now we can use the key as a pass for bandit17 level.</li></ul><p id="f0359f57-dcfd-4ce6-95e9-debceac1ecc1" class="">command: </p><p id="6a4cd7a6-6106-40d9-b854-eb4b56aededc" class=""><em>ssh -i pvt16.key bandit17@localhost</em></p><p id="c7593edc-8d0d-4696-95c6-fdc139bff1a9" class="">This was pretty much a hard level for me as I am new to nano editor and chmod command…i reffered some videos for passing this level so yeah I guess the levels are getting hard for a beginners but lets see the next one!</p><h1 id="dfeed444-b775-4edf-b13b-bd49563b102c" class="">Level 17-&gt;18 : </h1><p id="1a1d1381-21ad-49ac-a7f7-5a6ededba494" class="">There are 2 files in the homedirectory: passwords.old and passwords.new. The password for the next level is in passwords.new and is the only line that has been changed between passwords.old and passwords.new.</p><p id="14e7290d-e1da-4259-a97c-69394025d656" class=""><strong>Command</strong>:</p><p id="0c306192-c0db-410e-bfe1-deb6334adffe" class=""><em>diff passwords.new passwords.old</em></p><p id="58edc5fe-bbe7-47ca-bcc6-e7cca264b2f4" class=""><strong>Output:</strong> </p><p id="1fc53f78-301c-42c3-9f62-061c1769587b" class=""><em>42c42</em></p><p id="a26dda2e-fa10-41f1-a880-3b38903bb3da" class=""><em>&lt; kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd</em></p><p id="9f0f6794-bc57-46c7-bc8f-918ff154dd3e" class=""><em>– -</em></p><p id="544cffb6-1c44-46b1-9c30-8a20698cb91c" class=""><em>&gt; w0Yfolrc5bwjS4qw5mq1nnQi6mF03bii</em></p><p id="1bd88e7c-1b05-4c82-a37f-c7034c1d8274" class=""><span style="border-bottom:0.05em solid"><strong>Explanation:</strong></span></p><ul id="6597e99b-6e04-4d37-98f9-0a433fe80669" class="bulleted-list"><li style="list-style-type:disc">Lines preceded by a &lt; are lines from the first file.</li></ul><ul id="7a122354-1626-4b39-9bbb-d132554fd64a" class="bulleted-list"><li style="list-style-type:disc">Lines preceded by &gt; are lines from the second file.</li></ul><ul id="13835c4b-a7ca-48c5-9a60-a59c4b64bcb0" class="bulleted-list"><li style="list-style-type:disc">Now for 42c42 means we need to change line 42 in first line that need to be changed to match line number 42 in second file.</li></ul><ul id="d7a602ed-b7fe-47e3-9dfd-8312a0884a6c" class="bulleted-list"><li style="list-style-type:disc">As mentioned in the question the password for the next level is in file 1 (passwords.new) and thats the only line we need to change from file 2(passwords.old) so we have to submit the line from password.new</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d0968d98-4950-42c3-a0b0-767341e43a3d"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">i.e <em>kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd</em> for bandit18 and it will return “Byebye ! Connection to bandit.labs.overthewire.org closed.” Stay tuned for the next level!</div></figure><h1 id="e4a4de4f-6bfa-4d4b-aa0e-48b9e8a8fa75" class="">Level 18-&gt;19:</h1><p id="c010eed8-d4b2-43c5-8bcb-380382e2beff" class="">The password for the next level is stored in a file readme in the home directory. Unfortunately, someone has modified .bashrc to log you out when you log in with SSH.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c78f91a7-b980-48d6-affa-8e278e35b57d"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>First thought:</strong> We need to remodify the .bashrc so we can log in the server and using cat command we can find readme file for password! But how can we remodify the bashrc file? </div></figure><p id="71538357-05f9-433e-a996-8c0824830c6d" class=""><span style="border-bottom:0.05em solid"><strong>Explanation:</strong></span></p><ul id="998af761-33ad-4149-8523-1156aa3b42bf" class="bulleted-list"><li style="list-style-type:disc">Its a long process and I don’t know how to do that so we have one solution by ignoring the pseudo terminal which uses the bashrc file to log us in. We have a command called</li></ul><p id="9e8d3ffc-4794-4f8e-9e71-20dacff3d36e" class=""><em>ssh -T bandit18@bandit.labs.overthewire.org -p 2220</em></p><p id="0f72d294-bda6-4a60-bd65-b37d32d29724" class="">The above command will ignore the force allocation of psuedo terminal.</p><p id="884f9ee9-946d-4ac7-b465-350c027384ec" class="">After that we can use ‘ls’ ‘cat readme’ to read the password.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e7d4bf99-d1b2-4e9d-b23a-eee8dfdb4296"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x – password for bandit19</div></figure><h1 id="ea0630fb-697f-470b-9c7f-7d205826f423" class="">Level 19-&gt;20:</h1><p id="12b621eb-a540-4287-ad33-ff9e8f4bdfac" class="">To gain access to the next level, you should use the setuid binary in the home directory. Execute it without arguments to find out how to use it. The password for this level can be found in the usual place (/etc/bandit_pass), after you have used the setuid binary.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="86094f97-c59b-43db-931d-c1b88c1b520e"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>First thought</strong>: As mentioned in the question we need to use the setuidd binary in home directory.</div></figure><p id="525d618f-c7d6-4b92-9c3b-5dea77fb3f29" class=""><strong><span style="border-bottom:0.05em solid">Explanation:</span></strong> </p><ul id="550c3ff7-6088-41f0-a66f-5810fb4ef81e" class="bulleted-list"><li style="list-style-type:disc">We get a file bandit20-do which can be executed by bandit20 user and its moded with some permissions so that bandit19 user can’t use it to see the pass of the next level. </li></ul><ul id="89d62dbb-f953-45fd-aed4-837617a41ec5" class="bulleted-list"><li style="list-style-type:disc">So we run ‘<em>./bandit20-do</em>’ and it returns that Run a command as another user like <em>‘./bandit20-do id</em>’. I didn’t get it what it is, so I run the command and it returned the euid of bandit20 which is already set in the directory so we can then go on using following command: ./bandit20-do cat /etc/bandit_pass/bandit20</li></ul><p id="01c7b7e6-f9dc-483e-98eb-fca87872de46" class="">and we get the password :</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="cd9752cd-dd03-43b4-a7b5-5812985ad95f"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">GbKksEFF4yrVs6il55v6gwY5aVje5f0j bandit20 lvl19</div></figure><h1 id="ba005d40-cc71-4982-9a2e-6369b9c1a401" class="">Level 20-&gt;21:</h1><p id="27283321-8c56-4db6-8104-420cda6d986d" class="">There is a setuid binary in the home directory that does the following: </p><ul id="093c41e6-bac8-49d3-a548-ca274a2f160e" class="bulleted-list"><li style="list-style-type:disc">It makes a connection to localhost on the port you specify as a command line argument. It then reads a line of text from the connection and compares it to the password in the previous level (bandit20). </li></ul><ul id="6b21ff40-16dd-45e4-83f3-953bfd2b7197" class="bulleted-list"><li style="list-style-type:disc">If the password is correct, it will transmit the password for the next level (bandit21).</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d411afc9-52d9-40a0-8b60-8a04b25485fc"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">First thought: We need to see the help commands given which are:  <em>ssh, nc, cat, bash, screen, tmux, Unix ‘job control’</em> (<em>bg, fg, jobs, &amp;, CTRL-Z</em>, …)</div></figure><p id="1afcdea5-c279-4237-898d-c0a522bb3988" class=""><span style="border-bottom:0.05em solid"><strong>Explanation:</strong></span></p><ul id="5b80edb7-4239-41b7-b3da-25133f0e9b9d" class="bulleted-list"><li style="list-style-type:disc">So I connected to bandit20 and then used ls to see what we have there and then got file named ‘<em>suconnect</em>’ which is an setuid in the home directory. </li></ul><ul id="dff6e2b6-db51-44b5-8ac2-1ab7e0e8b756" class="bulleted-list"><li style="list-style-type:disc">We need to listen to the port for the request send to that ssh id and when we enter the password to login from 2nd terminal we will get the password for the next level in our main terminal where we are listening for the port request becuase it is mentioned in the question that it will read. a line of text from the connection and compares it to the password and if it is correct it will transmit the password for next level.</li></ul><p id="bc9935f6-153d-4744-86bb-e67c6bcdc912" class=""><em>Lets try it now!</em></p><ul id="c660dd9e-1d05-4e97-a704-f84ad660614c" class="bulleted-list"><li style="list-style-type:disc">To set up the listening port we will use netcat command with instructions of -l to listen -v to get more information -p to enter the port for listening.</li></ul><p id="cb295451-a61b-4591-ae97-2d855a6f8d76" class="">The command will be as follow: </p><p id="eae6679e-afdf-4dfd-89f8-7e65e12183ea" class="">‘<em>ncat -lvp 9999</em>&#x27; </p><p id="a289a55d-3f55-44e9-9670-ac0d8c2f6330" class="">here 9999 is a random port we need to listen and then we need to login in the other terminal or second terminal by</p><p id="6671f611-7b6a-4038-9af2-d9df994908a5" class="">‘<em>ssh bandit20@bandit.labs.overthewire.org -p 2220</em>&#x27; </p><ul id="9f1bd4e0-9885-463c-941e-1b6f42d2acc2" class="bulleted-list"><li style="list-style-type:disc">Now doing that will send the connection request on the first terminal where we are listening to the port 9999 then in the second terminal we need to use ‘.<em>/suconnect 9999</em>&#x27; so that the port is connected on both end and now we when we enter the password for bandit20 in first terminal then in the second terminal as the password will match it will send the password for the next level which is as follow:</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1e818f2a-65a7-4f50-b5cf-3bdc8351035b"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">gE269g2h3mw3pwgrj0Ha9Uoqen1c9DGr bandit21 lv20</div></figure><h1 id="7e7d67a1-e022-4a82-9e05-c111a8b10240" class="">Level 21-&gt;22:</h1><p id="491d2dcc-312b-4b03-8800-0a8f38ddcf4a" class="">A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="afe9b1a1-a1c5-4c93-bd43-bc3c4cd1fc57"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>First thought</strong>: I don’t know what cron is so search cron and see what it is and what it does…so I did searched cron on internet and ‘Cron’ allows Linux users to run commands or scripts at a given date and time. You can schedule scripts to be executed periodically. For commands that need to be executed repeatedly (e.g., hourly, daily, or weekly), you can use the crontab command. The crontab command creates a crontab file containing commands and instructions for the cron daemon to execute. You can use the crontab command with the following options: <p id="b35a38ae-8270-4788-8dc0-2d83e3bb1dc6" class="">‘<em>crontab -a filename</em>’</p><p id="adf440ff-0eb9-4ad3-a8fa-602b19714c54" class="">Install filename as your crontab file. On many systems, this command is executed simply as crontab filename (i.e., without the -a option).</p><p id="f17ff4e1-f4e8-4c16-b7da-efb03d1e449d" class="">‘<em>crontab -e</em>’</p><p id="b0927911-fe18-4d39-819d-2ab7734b5c44" class="">Edit your crontab file, or create one if it doesn’t already exist.</p><p id="6979f766-cf65-4d6e-b95d-c746bd5b81bb" class="">‘<em>crontab -l</em>’</p><p id="934d49b3-ce79-4f60-bb59-3537436f8c0d" class="">Display your crontab file.</p><p id="b26a9248-9e25-45aa-af82-68f8b99d8c61" class="">‘<em>crontab -r</em>’</p><p id="8f9fe912-8ba2-4349-b8d7-245d77aa511d" class="">Remove your crontab file.</p><p id="6303c8ec-d7fe-4d83-8ba2-999c78724532" class="">‘<em>crontab -v’</em></p><p id="9e8db16c-271a-4c2a-8c29-7bd69efaf891" class="">Display the last time you edited your crontab file. (This option is available on only a few systems.)</p><p id="f0bed344-8fa8-4eae-8d44-51513c7d35b1" class="">‘<em>crontab -u user</em>’</p><p id="5805e387-f32b-4d0a-8653-9153600c8c71" class="">Used in conjunction with other options, this option allows you to modify or view the crontab file of user. When available, only administrators can use this option.</p></div></figure><p id="aef9552e-f4ee-4292-bc08-1a1c4b892738" class="">
+</p><p id="8644a846-d83b-4107-9fe8-2ecb39dcc5c2" class=""><span style="border-bottom:0.05em solid"><strong>Explanation: </strong></span></p><ul id="b26ecffa-8c09-42d0-866b-645d0232ca82" class="bulleted-list"><li style="list-style-type:disc">First command cd.. to go in home directory and then I wrote ‘cd /etc/cron.d’ to get into the directory. After getting there I checked the contents by using ‘ls’ command and then I found a file named ‘cronjob_bandit22&#x27; so I tried to read it by using ‘cat cronjob_bandit22.sh’ but as I had no permission it wasn’t executing. </li></ul><ul id="bcf13da1-1b14-4b76-858a-8eb0f2c2838e" class="bulleted-list"><li style="list-style-type:disc">After that I tried ‘cat /etc/cron.d/cronjob_bandit22&#x27; to see what’s in the folder and that is where I found this bunch of content:</li></ul><p id="f29c1b6e-9cca-4701-904a-bf2c56dbbf9b" class="">“@reboot bandit22 /usr/bin/cronjob_bandit22.sh &amp;&gt; /dev/null</p><ul id="0ab9db40-7e1a-4b3b-abb6-c02848c43db9" class="bulleted-list"><li style="list-style-type:disc">* * * bandit22 /usr/bin/cronjob_bandit22.sh &amp;&gt; /dev/null”</li></ul><p id="64f4aacf-8738-4a71-a6c4-fa17872504fb" class="">here the cool thing is we got a directory path of bandit22.sh to read so then I executed ‘cat /usr/bin/cronjob_bandit22.sh’ as I entered the file the chmod command already got executed and it let me read the contents of the files:</p><ul id="72c004c8-b8d4-46e5-9030-5593226f2104" class="bulleted-list"><li style="list-style-type:disc">“#!/bin/bash</li></ul><ul id="a5aef04f-71e1-4d0e-a7e3-9e280f8deb74" class="bulleted-list"><li style="list-style-type:disc">chmod 644 /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv</li></ul><ul id="96d127df-7ae5-4361-879b-0bf5673aab33" class="bulleted-list"><li style="list-style-type:disc">cat /etc/bandit_pass/bandit22 &gt; /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv”</li></ul><ul id="b2205e83-131e-4884-a1be-a71d02da9715" class="bulleted-list"><li style="list-style-type:disc">here we can see in the third line that in we have a a directory path named ‘/tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv’ so I tried to read the content of the directory and then boom we got our password.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9f1854e5-d0af-4047-976c-7d1f4c9a1ece"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI bandit22 lv21</div></figure><h1 id="aeb10378-54fa-4298-8246-7742fe6c4858" class="">Level 22-&gt;23</h1><p id="6ac50983-cbb3-41f4-b61e-b40b9e68effc" class="">We need to do exact same thing as last level but this time we need to run some shell script as mentioned in the question.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="823ae1e4-cf7b-4665-ac7f-7f7634d4842f"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>First thought: </strong>I did exactly same thing as before but I just changed bandit22 to bandit23 for password of bandit23. I got stuck at running scripts as I don’t know how to run them but still i tried. And my oh my I did get the password. (And I learnt how to run shell script)</div></figure><p id="862196cf-d3bd-4cdb-8f06-ef922797d92b" class=""><span style="border-bottom:0.05em solid"><strong>Explanation</strong></span>:</p><ol type="1" id="68c926d9-bf26-4bd6-8b51-4e36cccad67b" class="numbered-list" start="1"><li>‘cat /etc/cron.d/cronjob_bandit23&#x27;</li></ol><ol type="1" id="4692d353-a58f-42b0-a4f4-8f19fb772e5b" class="numbered-list" start="2"><li>@reboot bandit23 /usr/bin/cronjob_bandit23.sh. &amp;&gt; /dev/null</li></ol><ol type="1" id="92f52a6a-18f1-4e83-b005-5d82e938fd90" class="numbered-list" start="3"><li>* * * * bandit23 /usr/bin/cronjob_bandit23.sh. &amp;&gt; /dev/null</li></ol><ol type="1" id="9eb07d3a-7bee-4e67-b40f-92ad215894a7" class="numbered-list" start="4"><li> ‘cat /usr/bin/cronjob_bandit23.sh’</li></ol><p id="3956cb4e-3bb4-452d-a06b-b3da3ec174ba" class=""><code>#!/bin/bash</code></p><p id="fdce1117-febc-4bb0-ba19-630cdb8378fb" class=""><code>myname=$(whoami)</code></p><p id="b875db0a-d847-47d1-a684-81849121480f" class=""><code>mytarget=$(echo I am user $myname | md5sum | cut -d ‘ ‘ -f 1)</code></p><p id="1199368d-e299-46a5-b43e-7975ff190a88" class=""><code>echo “Copying passwordfile /etc/bandit_pass/$myname to /tmp/$mytarget”</code></p><p id="38f6499f-034a-4584-bb73-d94b36c462c5" class=""><code>cat /etc/bandit_pass/$myname &gt; /tmp/$mytarget</code></p><ol type="1" id="a2d1d9ca-2798-4d98-ae9a-bf82b89df414" class="numbered-list" start="5"><li> cat /etc/bandit_pass/bandit22 &gt; /tmp/ryx</li></ol><ol type="1" id="a9f4c6d0-cb43-4991-a0c0-e7446d8b9ab9" class="numbered-list" start="6"><li>cat /tmp/ryx</li></ol><p id="1743221e-3417-481b-999b-47f576c35af7" class=""><em>Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI</em></p><p id="197a1d04-78d1-4cfc-abb5-5d01c01c6c05" class="">But wait isn’t this the same password of this level? Yep it is! So i recheck where I got this wrong and then I knew I am going all the way wrong executing the script. The script execution must be like this</p><p id="92149ec1-709f-474f-9a48-d5713abccac9" class="">‘<em>echo I am user bandit23 | md5sum | cut -d ‘ ‘ -f 1</em>&#x27;</p><p id="78dc0b9b-2d51-4c18-94a0-2dfb69bc9f67" class="">Return: 8ca319486bfbbc3663ea0fbe81326349</p><p id="f77c8538-a0de-4cc4-9930-cf8f425100f5" class="">Now the output which returned from running script for user bandit23 instead of bandit22 we got the md5sum of bandit23 which means we need to manually do the next step which is…</p><p id="15e8609a-ea29-4246-b13a-5b7eb4c9af06" class="">Return: </p><p id="ab7e64cf-d0d3-41b0-94ef-36e90d1c4df8" class="">bandit23 lv22 and this is the real password.</p><h1 id="33156f5c-4ad5-42dd-8d5c-44866a873faa" class="">Level 23-&gt;24</h1><p id="e2b22d0b-902f-4c85-b676-c4d09caf4cc7" class="">We need to write our own shell script to run.</p><p id="eb30a4e6-9ec1-4dce-949d-34730f406007" class="">Now the catch really here is that after a minute the script will be executed and in the next minute it will be deleted. So lets see what can we do.</p><p id="9dd10855-641e-4d59-b4b3-a8df8594c44c" class=""><span style="border-bottom:0.05em solid"><strong>Explanation:</strong></span></p><p id="de468f15-7b93-4656-aaf0-fc2e72fdc50a" class="">All the same steps like last one till step no.2(change from bandit23 to bandit24</p><p id="631f72d0-3156-4683-8817-77392e806baa" class="">After executing cat /usr/bin/cronjob_bandit24.sh we will get</p><p id="5ea45f1c-c3b6-4b30-a89c-f2286e301319" class=""><code>#!/bin/bash</code></p><p id="4c5a552a-deb0-4afc-8bb0-a62a185f827d" class=""><code>myname=$(whoami)</code></p><p id="8346875e-dce3-4249-81a9-30c5f9e23d48" class=""><code>cd /var/spool/$myname</code></p><p id="f8236964-082f-4142-8de0-359c83984054" class=""><code>echo “Executing and deleting all scripts in /var/spool/$myname:”</code></p><p id="b3f24344-15e4-48c4-bb29-c54491690010" class=""><code>for i in * .*;</code></p><p id="af7efe7d-f60d-45ea-bf51-2b6c06d45b30" class=""><code>do</code></p><p id="e4e85e10-b64d-4cb0-a573-abab4d90c28a" class=""><code> if [ “$i” != “.” -a “$i” != “..” ];</code></p><p id="b79e133c-edef-4355-bd92-10efbf11ccf5" class=""><code> then</code></p><p id="5e66c588-e0a5-4c18-bfcb-c46a140f4c1c" class=""><code> echo “Handling $i”</code></p><p id="b107445f-6a34-49e7-a788-1992d1474087" class=""><code> owner=”$(stat – format “%U” ./$i)”</code></p><p id="2540eeac-9c4c-46b6-8a0e-b4e67b8700d0" class=""><code> if [ “${owner}” = “bandit23&quot; ]; then</code></p><p id="dca740c2-ae37-46e5-9a82-653c5b74b209" class=""><code> timeout -s 9 60 ./$i</code></p><p id="c86723b3-ca8c-44c6-be77-5eee9132fb4e" class=""><code> fi</code></p><p id="36db7054-ea73-438b-b6f7-24e8e87565c6" class=""><code> rm -f ./$i</code></p><p id="429f5110-4bed-457e-a498-159820942098" class=""><code> fi</code></p><p id="7acf7271-a123-4f61-b259-cdaabf275da9" class=""><code>done</code></p><ul id="07c440ef-48c6-40ec-bb25-bf915a2016f5" class="bulleted-list"><li style="list-style-type:disc">This is the script stored in the bandit24.sh file which states that whichever script we will write will be executed for one minute and then get removed from the directory.</li></ul><ul id="462c2b43-cf03-4e0f-96bd-429ac860920d" class="bulleted-list"><li style="list-style-type:disc">So in last step we got the script and the script runner line too but here we have whole script but we need to mention the script runner line to run the script. How can we do that? </li></ul><ul id="62dbf4dc-8dd8-49e1-95ea-e46000d20e02" class="bulleted-list"><li style="list-style-type:disc">First thought I got was that just run the scriptrunner in terminal in /var/spool but we need to make a directory first to get the password in that file after a minute of execution. </li></ul><p id="c17df85f-cd26-499c-b9b6-d281efa50d11" class="">Lets do it in following steps.</p><p id="ceb88fd9-94ed-487b-8b78-cda1a242515b" class=""><span style="border-bottom:0.05em solid">Steps:</span></p><p id="4e1adebb-8045-4f29-97ab-c3e213b06186" class="">1. return = bandit23</p><p id="305d2c0f-8809-49bd-9f2d-ee865cea2a7d" class="">2. myname=bandit24</p><p id="bf282559-925d-42b5-a14e-2543786125a6" class="">return = makes myname to bandit24</p><p id="f0f2b72b-184e-4ab0-b066-d33b1ec4163d" class="">3. cd /var/spool/bandit24</p><p id="8e302bd5-0eea-4261-925f-0eb1e40521d3" class="">return = let you in the directory</p><p id="75919046-fca1-49ee-bd75-2ebc8bf211d7" class="">4. mkdir /tmp/lvl23</p><p id="8ff2fa12-0641-4805-9bb8-585a30784645" class="">return = makes a directory mentioned</p><p id="64eb1d9f-3148-4612-bb17-9d87066b5bbe" class="">5. chmod 777 /tmp/lvl23</p><p id="f9e0a8f5-47ca-4f33-a124-a2af46c43e57" class="">return = gives every user permission to read that file in the directory mentioned as first 7 is for the author, second 7 is for group, third 7 is for everyone.</p><p id="c60c3925-f273-4c8c-9cde-61fa53e2630a" class="">6. ls -l /tmp/lvl23</p><p id="6272ea42-3b06-47fa-8153-2e694720357e" class="">return= to check if the permissions are applied or not</p><p id="88a0e7e7-556d-473a-a2ad-4946bcd23ed2" class="">7. nano get.sh</p><p id="d113c569-bb05-42f5-b36b-46a763523bec" class="">return = to create a file named ‘get.sh’ to be created so that we can run our script.</p><p id="feb82e4b-29aa-4723-8832-74df190aaa8d" class="">8.</p><p id="4a8db5e1-245b-45d9-9de5-92ccb8981b0a" class=""><code>#!/bin/bash</code></p><p id="add2dca3-ea88-42fb-a741-f5f08a7282c6" class=""><code>cat /etc/bandit_pass/bandit24 &gt; /tmp/lvl23/passwords.txt</code></p><p id="f707a9d6-6e65-4481-9977-ec8f57426269" class="">return = We created our script which will read data from bandit24 folder and returns or copy the data in passwords.txt file located in the directory we created in step 4 (to save it in nano CTRL+O,ENTER &amp; CTRL+X)</p><ol type="1" id="c4792923-78af-40b0-9f7c-dfe448e70cde" class="numbered-list" start="9"><li> chmod +x get.sh</li></ol><p id="09a49906-49c4-4d61-9dbe-99b8b6efefc0" class="">return= to make it executable</p><ol type="1" id="e9888be6-d540-45bc-903a-dfc311f9d6f9" class="numbered-list" start="10"><li>date</li></ol><p id="252e6594-5304-43bb-ba79-7626976ad282" class="">return = the exact time with seconds too so when we hit new minute the data will be retrieved in the file named ‘passwords.txt’</p><p id="e49ae143-4bc5-47cc-b0f6-6e8ad0b41ed9" class="">11. cd /tmp/lvl23</p><p id="f0653df6-9443-4c0c-bc9e-689698bd00ee" class="">return= go into that directory</p><p id="eb2b28c5-8869-478c-b4b4-ca80ba5a84d8" class="">12. ls</p><p id="7b20454c-a6fe-4fa6-9fd3-17540cd07174" class="">return = after writing of data gets completed we can cat passwords.txt to get the password for next level.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ccda9fac-3c81-4470-a3d5-1786b8e85a3d"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ bandit24 lvl23</div></figure><h1 id="19810806-09c4-4fb8-a6e0-4ddde74c5e56" class="">Level 24-&gt;25</h1><p id="a2c38f7f-c1c4-44d5-ac9c-644ce841f149" class="">
+</p><p id="1218caab-8490-45dd-abcc-cd1319ee134b" class="">A daemon is listening on port 30002 and will give you the password for bandit25 if given the password for bandit24 and a secret numeric 4-digit pincode. There is no way to retrieve the pincode except by going through all of the 10000 combinations, called brute-forcing.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="cf9aab6b-b478-464e-95a4-d66422908050"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>First thought:</strong> We are going to encounter our first bruteforcing. So what is daemon? Lets search it.</div></figure><ul id="c27f8179-4fa4-4899-8af1-d58221aabd86" class="toggle"><li><details open=""><summary><span style="border-bottom:0.05em solid">Daemon</span></summary><p id="07ba4dff-2993-448d-bcce-d2af96315d8f" class="">A program that runs continuously and exists for the purpose of handling periodic service requests that a computer system expects to receive. The daemon program forwards the requests to other programs (or processes) as appropriate. Each server of pages on the Web has an HTTPD or Hypertext Transfer Protocol daemon that continually waits for requests to come in from Web clients and their users.A daemon is a program that runs by itself directly under the operating system whereas a demon is part of a larger application program.</p></details></li></ul><p id="63c47c94-e9d4-4aa8-aacc-bbecaf69a582" class=""><strong><span style="border-bottom:0.05em solid">Explanation:</span></strong> </p><p id="da186b3d-a546-4167-966a-76ead468aba5" class="">So we can use netcat to connect to the server.</p><p id="8e3499d8-1261-4d37-a7e1-76b24f27dc17" class="">Command: </p><p id="a02242e7-e8cf-446c-ba19-199675ab4384" class="">‘<em>nc localhost 30002</em>&#x27;</p><p id="ec340efd-49c4-459c-9bcd-642a6ab89f14" class="">Return: I am the pincode checker for user bandit25. Please enter the password for user bandit24 and the secret pincode on a single line, separated by a space.</p><ul id="a3c4e76d-db45-41ea-89a0-f875d48d038f" class="bulleted-list"><li style="list-style-type:disc">Now we need to enter that 4 digit combination code which we need to bruteforce. So that 4 digit code can be from 0–1000 so we need to write a script that checks every 4 digit combination and if that is right then that will return back the password for next level.</li></ul><p id="6077e986-ed6e-4e8e-8683-576eb2fb5f65" class="">So lets write the script shall we?</p><ul id="435b6c91-0649-490d-bbce-c6c533af6f0e" class="bulleted-list"><li style="list-style-type:disc">But before that create an active directory like last time and give the permission and all like last time and create a file ‘nano brute.sh’</li></ul><p id="f1231b54-5020-47c2-896c-1d5b956457db" class="">In nano editor we can write the script.</p><p id="077d992b-272f-48a3-8a6e-79d6ad574e7a" class=""><code>!#/bin/bash</code></p><p id="8b5a5209-665d-473c-9643-ab08ac223026" class=""><code>for i in {000..9999}</code></p><p id="e69de97c-b519-43e4-9491-efaf8864f9bb" class=""><code>do</code></p><p id="659692a9-c79b-4dc6-bf4f-18af28232683" class=""><code>echo “UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ $i”</code></p><p id="a427c85f-b6cc-46c9-b9c6-577058e7c687" class=""><code>done</code></p><ul id="5bd53a0b-c17f-4d5d-9554-b3c0187db9c3" class="bulleted-list"><li style="list-style-type:disc">Now here we are running a for loop where we are going from 1 to 9999 four digit numbers one by one and then echo line will write the password and the number simultaneously.</li></ul><ul id="0fe60dac-fbb9-40ea-baef-9e9bafe61449" class="bulleted-list"><li style="list-style-type:disc">Once we run it we can cat that all data into one file “bruteforce.txt”</li></ul><p id="aaddb8c9-5bb6-45d0-9213-55cb083614be" class=""><span style="border-bottom:0.05em solid">Command</span>: </p><p id="161cc0e7-5397-4790-9b4c-6ad60abb9fcc" class=""><em>./brute.sh &gt; bruteforce.txt</em></p><p id="f0c63c62-e6df-4a1d-bbbc-4c16bde01909" class="">Once done we can pipe the network host with bruteforce.txt in here to get next level pass.</p><p id="92af07d0-8262-4aea-9457-3e5ab42a7914" class=""><span style="border-bottom:0.05em solid">Command:</span></p><p id="7a88f9fd-cb76-4237-8c76-4279bac12164" class=""> <em>cat bruteforce.txt | nc localhost 30002</em></p><p id="a79d0540-eec2-42ad-91bd-9e9dbdefd564" class="">The command will run on and when the 4 digit passcode match with the passcode checker it will return the password for bandit25</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7cfd58de-b930-46dd-8db9-ea403ee379ef"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">uNG9O58gUE7snukf3bvZ0rxhtnjzSGzG bandit25 lv24</div></figure><h1 id="75bcb7d6-ab00-4ea1-8423-0ec717f6654d" class="">Level 25–26</h1><p id="39100a90-d757-4d69-b34e-a0862b029b29" class="">We get to log in with the passcode we retrieved last time and not we need to log in to the server with the ssh key provided in the directory.</p><p id="af3e3858-5dc8-4bd3-b3bf-ad08791e1ea9" class=""><span style="border-bottom:0.05em solid">Command:</span></p><p id="1c650f48-5ec3-4237-847c-2d7fc2e33e39" class=""><em>ssh -i bandit26.sshkey bandit26@localhost</em></p><ul id="dbaea2d6-eef9-49fc-8683-dfc14019ef79" class="bulleted-list"><li style="list-style-type:disc">After connecting to bandit26 we get following error: Connection to localhost closed.</li></ul><ul id="6f882573-eb32-467b-8c5e-370944f4c860" class="bulleted-list"><li style="list-style-type:disc">Now as mentioned in the question “ The shell for user bandit26 is not /bin/bash, but something else. Find out what it is, how it works and how to break out of it.”</li></ul><ul id="50cdb294-0e8c-4989-b4d1-a144a816bf4e" class="bulleted-list"><li style="list-style-type:disc">We gotta do something here like breaking into the whole server? I don’t have any idea but after going in I did try to find the home directory by using command cd .. and ls -l to see the directories but we can’t access them. So what can we do here? We have some list of commands for help in the question but we already know what they do but there are 2 commands which highlights out and they are more and vi command which we can search on the google what they do.</li></ul><ul id="52d4ca77-a599-4a40-a682-67f35559cbcd" class="bulleted-list"><li style="list-style-type:disc">‘more’ command is used to view the text files in the command prompt, displaying one screen at a time in case the file is large (For example log files)</li></ul><ul id="5ee53b3c-ec56-4459-a817-cba91a8f27a0" class="bulleted-list"><li style="list-style-type:disc">‘vi’ is the vi editor elaborated as visual editor. It is installed in every Unix system.</li></ul><p id="84474a04-8f69-4d49-879f-e4ce0f9abef1" class=""><span style="border-bottom:0.05em solid"><strong>Explanation:</strong></span> </p><p id="58180b40-371e-4d77-b0e3-3501bd0ad290" class="">Now here is the truth…I literally watched 2 videos from Hackersploit and John Hammond and still have some doubts. I did all the steps shown in the video because this one was way tricky for me and that is why if you don’t get any of these then I highly recommend you to watch some videos. So here we go..</p><ul id="0bcb726b-bcf2-4549-ba20-0994df46c853" class="bulleted-list"><li style="list-style-type:disc">Once we log into the server with ssh key we get an error that connection is closed to localhost but we can see an ASCII art just above it so we can do some steps here like:</li></ul><p id="67192210-9400-41f7-93dc-cc67cb334206" class="">S-1:  Minimize the window so that you can see more command to see the files.</p><p id="de3d4730-a32d-4577-b921-4072a9b8efca" class="">S-2:  Now log in again via ssh key and then you can see the more command to see more text from ASCII image.</p><p id="8d13f21c-255b-49ca-b834-60e8ce8d97d4" class="">S-3:  Now press ‘v’ to enter vim editor.</p><p id="ef4ea4a9-872b-4785-88f3-b5a01f3e358b" class="">S-4:  Now write : </p><p id="4404fec7-5799-4459-baae-71a52185a495" class=""><em>:r /etc/bandit_pass/bandit26</em></p><p id="15f4b12d-3abd-44b2-8810-7e711ab50908" class="">hit ENTER.</p><p id="279cdf0d-3123-41b7-aaba-280822f14c73" class="">S-5:  Maximize the window and you can see the password in between the lines of ASCII image.</p><p id="587d622f-c033-425b-bf59-25c87229fe84" class="">S-6:  To get the shell for the ssh we need to set the shell by using the following command:’:set shell=/bin/bash’</p><p id="2ebc5bd0-1bd2-4697-af9b-39433ce36c70" class="">S-7:  To activate the shell we need to write ‘:shell’</p><p id="515010d1-6ab0-4c7c-a1e4-9e1d8c4a7c4c" class="block-color-gray_background"><em>5czgV9L3Xx8JPOyRbXh6lQbmIOWvPT6Z bandit26 lv25</em></p><blockquote id="775d4523-627c-4aa6-9f31-0def2c37d48c" class="">NOTE: This way indeed a CTF solving and was a bit tough for me but I am ready to grind more so lets go.</blockquote><ul id="90007ab5-7260-49bf-b1ba-7133364cd6d5" class="bulleted-list"><li style="list-style-type:disc">Once we get the shell we can go right away to the next level 26-&gt;27 where we need to just retrieve the password.</li></ul><ul id="fe5be986-5317-4036-b1a2-cf05860e2ee9" class="bulleted-list"><li style="list-style-type:disc">Now here we have a bandit27-do file which we need to cat as user bandit27 so we can use this command: </li></ul><p id="b4d39ef9-9fa2-42de-a40a-b57e1c69ce6c" class=""><em>./bandit27-do cat /etc/bandit_pass/bandit27</em></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="55b6c1af-967d-49d6-b9fd-cca64d940653"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">3ba3118a22e93127a4ed485be72ef5ea bandit27 lv26</div></figure><h1 id="9b66ce21-973e-42a7-93da-56e0e7d8f612" class="">Level 27-&gt;28</h1><p id="216912bb-921c-4ebf-8f16-d3989e6d08bf" class="">There is a git repository at ssh://bandit27-git@localhost/home/bandit27-git/repo. The password for the user bandit27-git is the same as for the user bandit27.</p><p id="a1a78a7a-05b1-4fc1-a8c8-5baca63c316b" class="">Clone the repository and find the password for the next level.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c880ac16-28ac-4fc0-ad11-b2865fd43a01"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>First thought:</strong> So we need to clone the given repo and then cat the password. But how? Research about how to clone the repo.The git pull command is used to get updates from the remote repo. This command is a combination of git fetch and git merge which means that, when we use git pull, it gets the updates from remote repository (git fetch) and immediately applies the latest changes in your local (git merge)…blah blah blah so we can use git clone to clone the repo right? Lets see</div></figure><p id="130f7f5a-ae19-42f3-9649-780bba69329e" class=""><span style="border-bottom:0.05em solid"><strong>Explanation:</strong></span></p><p id="853273f7-4846-4b37-8e93-393dce1b9bc8" class="">S-1:  We need to create an directory or we can just cd the previous directory but for the sake of git (lmao), I created a new directory by using <em>mkdir /tmp/newryx</em></p><p id="e8db36d2-9bbd-4a3c-96b1-a7098b1acffe" class="">S-2:  <em>cd /tmp/newryx</em></p><p id="aa09da32-eb06-46a1-b6a8-26d5568ae681" class="">S-3:  Now for cloning so yeah I used</p><p id="8181c0f5-a84a-4b8a-9bc0-eb28f77b06fe" class=""><code> git cloning ssh://bandit27-git@localhost/home/bandit27-git/repo</code></p><p id="26d93ee5-75d4-42fd-aa91-e1377bfca324" class="">and yeah I cloned the repo here(password is same as bandit27)</p><p id="a4f36328-1902-4843-93f6-31bfab057a44" class="">S-4:  Now I got into the directory cd repo and then cat the README file located there and boom we got our password…The password to the next level is: </p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3b5b160e-f445-451f-acc1-448b2808e960"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">0ef186ac70e04ea33b4c1853d2526fa2 bandit28 lv27</div></figure><h1 id="a8130a9f-083b-41cd-a7c5-a6bfd70bc1a8" class="">Level 28-&gt;29 </h1><p id="7bd7457e-1ac8-47cb-8eab-54b1c8a8b52a" class="">There is a git repository at ssh://bandit28-git@localhost/home/bandit28-git/repo. The password for the user bandit28-git is the same as for the user bandit28.</p><p id="89e8769d-9c9b-45fc-a766-cfafee30e50a" class="">Clone the repository and find the password for the next level.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="776fe826-4f95-440f-9859-4168f942309c"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>First thought:</strong> Isn’t this the same problem like last time? Lets follow the last problem steps and see what happens.</div></figure><p id="3ae06364-1765-4200-9d2e-788ec12e282e" class=""><span style="border-bottom:0.05em solid"><strong>Explanation:</strong></span></p><p id="730386d5-9ca6-4f92-b005-c05710c31a7b" class="">S-1:  All the steps just like last problem (don’t forget to change the names &amp; password)</p><p id="11c53cfa-e806-41ec-b13e-e9f0b2b49e98" class="">S-2:  Now the thing is we got a file named README.md and when we cat that file we get…</p><p id="e6f8f09e-9e1e-4def-9691-e96a425cfa99" class="">“</p><p id="aeb0d093-93e4-4304-b065-02843d839d94" class=""># Bandit Notes</p><p id="0e2d66fe-43d9-40f9-8d61-77bd6cb2bfcd" class="">Some notes for level29 of bandit.</p><p id="f728759d-a5f2-454b-907f-52df0fefe1d4" class="">## credentials</p><ul id="f1f41459-d35b-47b4-825a-5daa6e40e5bf" class="bulleted-list"><li style="list-style-type:disc">username: bandit29</li></ul><ul id="980a32c6-f873-4898-a3b4-3ad07b26d95f" class="bulleted-list"><li style="list-style-type:disc">password: xxxxxxxxxx</li></ul><ul id="d4690e94-c997-4f00-9f86-e080ee743790" class="bulleted-list"><li style="list-style-type:disc">“</li></ul><ul id="51a18e3f-0ac5-4d57-a20b-d84229f6f659" class="bulleted-list"><li style="list-style-type:disc">So the file just contain this data only and the password is very small and it has some kind of encryption involved (I guess)</li></ul><p id="bf933a12-422d-4ca6-95a7-c493dc65a493" class="">So I tried to see the branch of our file by </p><p id="d327926c-6079-4d4a-8f16-47d5e5c0173f" class="">g<em>it branch</em></p><p id="06891ad6-56f8-4816-b166-3eaecdda8227" class="">Return: I got a our origin branch name ‘master’.</p><ul id="6c5341dd-5f12-451f-b326-ed9af6e9b03a" class="bulleted-list"><li style="list-style-type:disc">I tried several commands like ‘git status’ to view status of the branch, ‘git checkout -b master’ to switch the branch but I guess nothing was working.</li></ul><ul id="0daeb116-ccd0-4b14-b3ab-06e544f9ead9" class="bulleted-list"><li style="list-style-type:disc">I even tried to see the head branch by using ‘<em>git branch -a</em>’ and it reverted back</li></ul><p id="0b1eac3f-d12a-4ac6-90c0-9a62801d7826" class=""><code>remotes/origin/HEAD -&gt; origin/master</code></p><p id="099c4125-137f-41d8-81d9-9160ca924a53" class=""><code>remotes/origin/master</code></p><p id="1e0b5177-b8f8-4f1b-89c9-6d58b59d0823" class="">S-3:  Well I am forgetting one big thing which I shouldn’t is that checking logs…by ‘<em>git logs</em>’</p><p id="97b4cbfe-faab-4bf3-b8c6-8324f02c230d" class="">S-4:  Now we have some logs and what we can do is see the first one which is latest commit and middle one is the change before releasing the latest commit and the last one is the initial commit. </p><p id="f371b852-14f4-46c7-9960-d5043f4f873e" class="">So I opened up initial commit by using ‘<em>git show de2ebe2d5fd1598cd547f4d56247e053be3fdc38</em>&#x27; and in that file the password was to be decided.</p><p id="53cbc06c-d6c6-432a-afd0-872f413fd8d5" class="">S-5:  I opened the middle commit by </p><p id="0e552f9f-e47e-4218-b61e-15a8f0e77f69" class=""><em>git show c086d11a00c0648d095d04c089786efef5e01264</em>&#x27; and boom we have our password.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c2a760bc-5c89-499c-b0d6-a5b98ef9682b"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">bbc96594b4e001778eee9975372716b2 bandit29 lv28</div></figure><blockquote id="f93d2afe-c95b-4082-bd28-c39bdd71d701" class="">NOTE: Sometime when we are doing hard stuff, don’t forget the basics XD.</blockquote><h1 id="ca71e467-5377-45a3-b986-c19647debc08" class="">Level 29-&gt;30 </h1><p id="b4e820ee-b91e-4738-b6a2-ec501462143d" class="">Its the same as last 2 problems with new address so lets reach till we cat the file and then think what to do next.</p><p id="6903bafd-8395-4e9d-89a1-701c0eb2ebe2" class="">After doing all we get :</p><p id="f5044ab1-3eb3-4595-9bda-46aa1b6de96e" class=""># Bandit Notes</p><p id="12636a8b-60a3-41a9-8a3a-a5edbf77cd02" class="">Some notes for bandit30 of bandit.</p><p id="000558e0-522e-4c44-a59a-f0726b019771" class="">## credentials</p><ul id="fdf6beac-19af-4ec3-a78a-9698c7463c78" class="bulleted-list"><li style="list-style-type:disc">username: bandit30</li></ul><ul id="586155ef-e22f-4d97-8fc2-c97d5475e761" class="bulleted-list"><li style="list-style-type:disc">password: &lt;no passwords in production!&gt;</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3f9386c7-975a-43c2-9fdc-94c07acd6d27"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>First Thought:</strong> So the obvious thing we can do is see the logs… so lets do it. </div></figure><p id="52dddb82-bfcf-417e-8b89-344c98bede35" class=""><span style="border-bottom:0.05em solid"><strong>Explanation:</strong></span></p><ul id="0a90c83e-54b7-485d-970f-870dcec0b744" class="bulleted-list"><li style="list-style-type:disc">So I opened the initial commit and I got the same thing just the username was bandit29 and in the next commit the username was changed from bandit29 to bandit30.</li></ul><ul id="ca6f7408-b354-44cf-8fdb-b892d9e8ba5b" class="bulleted-list"><li style="list-style-type:disc">The first thought got struck in my head was for both the bandit29 and bandit30 the passwords are same because the file is telling us that no password in production. So I tried doing that, but I was wrong and the passwords are indeed different. </li></ul><ul id="a6aecbaf-d0a0-4559-bb23-a10c99ac9605" class="bulleted-list"><li style="list-style-type:disc">But what we were doing in last step maybe it can be useful here, like we can dive into new branch by using ‘<em>git branch -a</em>’ and see what branch you are in and we can dive into the developer branch by using </li></ul><p id="f4ae3700-7291-480d-ab3f-1785d20719de" class=""><em>‘git checkout /remote/origin/dev</em>’ </p><p id="190feccc-69ed-4e7f-8665-a31fd498a1ee" class="">and there we can check the logs and boom we got the password in the latest commit.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="50bbb840-e39b-461e-b32e-60a428b413ed"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">5b90576bedb2cc04c86a9e924ce42faf bandit30 lv29</div></figure><blockquote id="f61efafc-bbf5-4466-944e-ba7d398661b7" class="">NOTE: Use google as much as you can to search what one command does and try it practically in a test terminal.</blockquote><h1 id="01b97cdd-9d10-4a3b-8840-08dcd854c53b" class="">Level 30-&gt;31 </h1><p id="0db45dad-8e50-4690-a4f2-ee74dec190a3" class="">We have to follow same path as earlier till reading the file.</p><ul id="17ed9fb0-fdc7-4068-af35-9b01b1381077" class="bulleted-list"><li style="list-style-type:disc">After reading the file we get “just an epmty file… muahaha” …so I checked logs and it was the only commit and then I checked branch and no branch was attached here.</li></ul><p id="6203983b-878b-4b20-ae3a-c08b0764e31b" class="">I checked status and it was working good. So what we have here is the file which is roasting us but what can we do here? </p><ul id="3719b7b6-9b67-4264-b599-a2ee0fbec89f" class="bulleted-list"><li style="list-style-type:disc">I tried to use ‘push’ &amp; ‘pull’ command to see if anything needs to be updated or not by using :</li></ul><p id="305ae003-8367-40e5-86cb-87ba1efbaaf6" class=""><em>git pull origin HEAD:master </em></p><p id="da9f1cd1-8d8c-47b3-bc78-916f0e28a56c" class="">and </p><p id="e15c146b-597f-42d6-8288-eee380df3605" class=""><em>git push origin HEAD:master’</em></p><p id="e34888d8-68c3-4f66-a5f0-267e3bed7287" class="">but it was already up to date. What now?</p><ul id="cc53ea1c-dfa4-4184-859e-0313378a019b" class="bulleted-list"><li style="list-style-type:disc">So nothing was working out and the repo was empty but let me check is there any hidden file in the folder by ls -al and yup it had one and then I got the .git directory.</li></ul><ul id="b19268f4-a446-4217-9662-974b375e1ab7" class="bulleted-list"><li style="list-style-type:disc">I opened it and there was several folders and files but one that was catching my eye was ‘packed-ref’…so I read that file and it has indeed 2 hash one is initial commit and other one was tagged ‘secret’ so I chose to see the hash and then I got my password.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="94941c5b-2a10-484b-a9ac-a37ad6d6412e"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">47e603bb428404d265f59c42920d81e5 bandit31 lv30</div></figure><h1 id="0107985c-ff71-4b16-93df-a3d2b9920e9a" class="">Level 31-&gt;32 </h1><p id="d7cc521c-b5d0-412a-b2f2-771aae5c55ee" class="">We need to push the file to the remote directory (I am reading the content of README.md and before that you need to complete all the steps just like last time)</p><ul id="6d768dfd-233d-4207-9542-e3f15697b6d1" class="bulleted-list"><li style="list-style-type:disc">So we will use the power of knowledge we used in last question(its always like that) So for pushing the content we can use </li></ul><p id="02327a58-4a97-415b-af16-1ca16fb1b5b2" class=""><em>git pull origin HEAD:&lt;directory&gt;</em></p><ul id="cfffa0cd-6166-4962-87f4-1d6359a01438" class="bulleted-list"><li style="list-style-type:disc">Lets do this fellas!</li></ul><p id="21322da3-5d70-481d-b688-67ac08bfb66c" class="">So README.md says this:</p><ul id="53fb5fda-2bd3-4d1e-95e7-038dc6c67b83" class="bulleted-list"><li style="list-style-type:disc">This time your task is to push a file to the remote repository.</li></ul><p id="bada138e-f246-4235-ad2f-3cbc90cafc3c" class="">Details:</p><p id="7456c381-5aaf-4d86-86a1-36340427a366" class="">. File name: key.txt</p><p id="b2781ea6-2248-4a99-afa4-6c432011cda6" class="">. Content: ‘May I come in?’</p><p id="4da9736c-6176-4cb0-9498-51e1d276211b" class="">. Branch: master</p><ul id="bafcbfa5-5aa5-48f8-a698-d16a64dcbfcf" class="bulleted-list"><li style="list-style-type:disc">So with ‘<em>nano key.txt</em>’ I created a file and then wrote ‘May I come in?’ and then tried to add the file by using command ‘<em>git add key.txt</em>’ but as .git-ignore was ignoring the .txt so we need to append -f at the end which says <em>‘git add key.txt -f’</em> and it will add it to the repository and now we need to push it but before that we need to do a commit so write ‘git commit’ and then write out whatever commit message you want to and then push it by using ‘<em>git push</em>’ and then add the passwords and then you’ll get this:</li></ul><p id="ded48f1b-59f8-4963-8bc4-c84bb01f83af" class="">
+</p><p id="aeb9bea5-c8a8-4a32-aecf-82fd837bc9f3" class=""><code>Counting objects: 3, done.</code></p><p id="0a93158f-0570-42e2-b600-69dac7a3d24e" class=""><code>Delta compression using up to 2 threads.</code></p><p id="d9748405-8be7-4772-8c83-98b1dcd88102" class=""><code>Compressing objects: 100% (2/2), done.</code></p><p id="fd292d58-523c-4560-b014-80fee203effb" class=""><code>Writing objects: 100% (3/3), 324 bytes | 0 bytes/s, done.</code></p><p id="75037cba-7d10-4653-953e-e593b5966789" class=""><code>Total 3 (delta 0), reused 0 (delta 0)</code></p><p id="d5079fdc-580a-4a53-b061-8704de996cd9" class=""><code>remote: ### Attempting to validate files… ####</code></p><p id="6431c131-9510-4b80-8111-60e42c22acaa" class=""><code>remote:</code></p><p id="a1f55abe-bc05-4be3-b073-fe3f4af5d52a" class=""><code>remote: .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.</code></p><p id="1c299803-a6ec-4acb-9b38-3cc6c7934438" class=""><code>remote:</code></p><p id="14edce96-a526-45fa-9ed5-e544588cac87" class=""><code>remote: Well done! Here is the password for the next level:</code></p><p id="d133d4a1-e33f-4ea2-8b67-011f7623aaaf" class=""><code>remote: 56a9bf19c63d650ce78e6ec0354ee45e</code></p><p id="c6a41413-4c96-4ddf-89e6-f88d9de8d6d7" class=""><code>remote:</code></p><p id="59c281b2-86d0-4a1e-8f70-7dc566f1b8a1" class=""><code>remote: .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.</code></p><p id="badbc31d-f523-4190-8647-b61a04311f13" class=""><code>remote:</code></p><p id="fa0d677f-79d5-462e-8ab2-5ed6db4b0588" class=""><code>To ssh://localhost/home/bandit31-git/repo</code></p><p id="6975a3f3-dd6b-4c03-8737-75adeab1eaa9" class=""><code>! [remote rejected] master -&gt; master (pre-receive hook declined)</code></p><p id="471ffc28-5f5e-4d25-9fa5-4cc6a91ba1f1" class=""><code>error: failed to push some refs to ‘ssh://bandit31-git@localhost/home/bandit31-git/repo</code>’</p><p id="90485eda-fa9d-439c-9c8a-d73a70a33d79" class="">
+</p><p id="7c7df9ce-74bc-4c1f-9653-f0eabf333fd5" class="">In between the line we have the password and it is:</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b0964fc8-6177-4645-9b61-4e87dce815c8"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">56a9bf19c63d650ce78e6ec0354ee45e bandit32 lvl31</div></figure><h1 id="ddb0d98e-5e1c-437f-b8d0-7bc2d2f91ea3" class="">Level 32-&gt;33</h1><p id="b921c7c0-66c7-420b-8012-13a2bb350552" class="">After all this git stuff its time for another escape. Good luck!</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="87de7157-973e-4da4-a61e-7792d075251f"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>First thought: </strong>Its a CTF like last time and it will take immense time but try this time to break it on your own. Come on come on, chop chop!</div></figure><p id="66574595-c271-4b06-a71b-20b9008b816f" class="">We go in and we see Uppercase Shell and uhh… idk what uppercase shell is…(lol)</p><ul id="a2a6d92d-1be3-4c8e-b09c-3562d5b35672" class="bulleted-list"><li style="list-style-type:disc">Well I saw a video regarding this and found a solution where we can just write “$0&quot; in the uppercase shell and we can then give the shell commands to it just like before.</li></ul><p id="8663a07c-842c-4877-8054-83bab8b1250c" class="">So I then tried to see the password of bandit33 by command </p><p id="36a5429e-804f-4289-935d-056a3a0d5d9c" class="">‘<em>cat /etc/bandit_pass/bandit33&#x27;</em></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="bcbe2bc4-d491-44a8-a4e5-b5a05ed302c5"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">c9c3199ddf4121b10cf581a98d51caee bandit33 lvl32</div></figure><blockquote id="248878fc-4c3a-4860-a4b6-9355a73ac90a" class="">NOTE: If you don’t see a light in room then go search for sun outside the room (lol just made it out and idk why I put it here XD)</blockquote><p id="59780377-c6b7-4db4-88e0-4f7feb0defe5" class="">
+</p><ul id="ad14fb4e-b215-4b79-8438-57a48001f2bb" class="bulleted-list"><li style="list-style-type:disc">I solved this all level on 24th of the July,2021 and we don’t have bandit33 level so I guess we need to wait but grind must not be stopped. So I will try some more wargames from OTW soon.</li></ul><p id="3dc259e8-7ab3-45b9-8d04-dc595bdf6239" class="">
+</p><p id="dd373770-f06b-4410-9228-0c05ec648650" class=""><span style="border-bottom:0.05em solid"><strong>Huge Help:</strong></span></p><p id="e34c3e8a-99cf-4c0d-adae-ba601f542a43" class="">Hackersploit, JohnHammond, Zulu CaPwn…I highly recommend you this 3 YouTube channels for any query regarding Bandit Wargames. I learnt a lot from them and yeah one more thing just don’t see them blindly, try to search the command listed in the ‘Helpful’ section below the questions and once you get that thing then go for it.</p><p id="ae634270-6547-446a-ac2b-2429b71a006a" class="">
+</p><p id="c62814c2-08c8-4e66-98f0-455e423764cb" class=""><span style="border-bottom:0.05em solid"><em>GG! Bye Bye! See you all soon!</em></span></p><p id="ce44d3d6-43be-4429-813b-709732b98943" class="">
+</p></div></article></body></html>
