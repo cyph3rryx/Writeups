@@ -3,8 +3,8 @@
 ## Me and 0xManan did this challenge together and hell yeah it was worth it.
 
 1. We land on login page.
-2. Serch for robots.txt
-3. Found admin.phps
+2. Serch for _robots.txt_
+3. Found _admin.phps_
 4. Opened admin.phps but it says not found.
 5. So tried appending phps in index also. and viewed source page.
 6. Got the source code with a php code.
@@ -65,6 +65,7 @@ $msg = "Welcome guest";
 ```
 
 1. So i saw that in second line we have _cookie.php_
+
 2. Opened it and found 1 so i tried _cookie.phps_ to get the source code and it reverted back.
 
 ``` php
@@ -116,6 +117,7 @@ echo(serialize(new access_log("../flag")));
 ```
 
 1. Last line was added by me because we need a serialized value of the access.log but don't have permission to overwrite it so created a new access.log and then as per hint traversing the ../flag
+
 2. Got the output:
 
 `
