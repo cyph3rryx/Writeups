@@ -23,9 +23,9 @@ https://caas.mars.picoctf.net/cowsay/{message}
                 ||     ||
 ```
 
-3. I used Wappalyzer to see what type of page we are in and what kind of services it’s using
-4. Using it, we get to know that it uses node.js services (index.js is already given to us as a separate file for downloading)
-5. So tried appending it in the end ; ls
+3. I used _Wappalyzer_ to see what type of page we are in and what kind of services it’s using
+4. Using it, we get to know that it uses _node.js_ services (_index.js_ is already given to us as a separate file for downloading)
+5. So tried appending it in the end ```; ls```
 
 [https://caas.mars.picoctf.net/cowsay/ryx; ls](https://caas.mars.picoctf.net/cowsay/ryx;%20ls)
 
@@ -47,7 +47,7 @@ public
 yarn.lock
 ```
 
-6. We have falg.txt here so we will simply cat it out. 
+6. We have _falg.txt_ here so we will simply cat it out. 
 
 ```
  _____
