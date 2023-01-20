@@ -1,7 +1,9 @@
 # Most Cookies → 150 Pts.
 
 1. We have a same cookie page as the last one (more cookies)
-2. We write snickerdoodle and get our cookie in an encrypted format.
+
+2. We write _snickerdoodle_ and get our cookie in an encrypted format.
+
 3. We have given [server.py](http://server.py) which has
 
 ``` python
@@ -66,11 +68,13 @@ if __name__ == "__main__":
 
 4. What we can see is the wordlist we have here. 
 
-cookie_names = ["snickerdoodle", "chocolate chip", "oatmeal raisin", "gingersnap", "shortbread", "peanut butter", "whoopie pie", "sugar", "molasses", "kiss", "biscotti", "butter", "spritz", "snowball", "drop", "thumbprint", "pinwheel", "wafer", "macaroon", "fortune", "crinkle", "icebox", "gingerbread", "tassie", "lebkuchen", "macaron", "black and white", "white chocolate macadamia"]
+`cookie_names = ["snickerdoodle", "chocolate chip", "oatmeal raisin", "gingersnap", "shortbread", "peanut butter", "whoopie pie", "sugar", "molasses", "kiss", "biscotti", "butter", "spritz", "snowball", "drop", "thumbprint", "pinwheel", "wafer", "macaroon", "fortune", "crinkle", "icebox", "gingerbread", "tassie", "lebkuchen", "macaron", "black and white", "white chocolate macadamia"]`
 
-1. This are the words which will give us our cookie. 
-2. The JWT token is saying very_auth = snickerdoodle when we decode it so we need very_auth to say admin and then copy that very encoded JWT token and create a it as login cookie but how?
-3. So we need a key and then we need to create very_auth = admin
+5. This are the words which will give us our cookie. 
+
+6. The JWT token is saying _very_auth = snickerdoodle_ when we decode it so we need _very_auth_ to say admin and then copy that very encoded JWT token and create a it as login cookie but how?
+
+7. So we need a key and then we need to create _very_auth = admin_
 
 ``` python 
 import hashlib
@@ -106,7 +110,7 @@ butter
 {'very_auth': 'snickerdoodle'}
 `
 
-8. We used the snickerdoodle JWT Token to get the key and now as we have key we can now make our own JWT Token.
+8. We used the _snickerdoodle_ JWT Token to get the key and now as we have key we can now make our own JWT Token.
 
 ``` python
 import hashlib
@@ -130,12 +134,13 @@ print(URLSafeTimedSerializer(
 ```
 
 `
-💡 eyJ2ZXJ5X2F1dGgiOiJhZG1pbiJ9.Y4We0g.Cpg8E8mSastFPqOfoJnhhk4Im70
+eyJ2ZXJ5X2F1dGgiOiJhZG1pbiJ9.Y4We0g.Cpg8E8mSastFPqOfoJnhhk4Im70
 
 `
 
 9. Now we need to paste this JWT token as value in the cookie in session value and we will get out flag.
 
   `picoCTF{pwn_4ll_th3_cook1E5_25bdb6f6}`
+
 
 Note: For every user the flag will be different.
