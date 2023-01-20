@@ -105,6 +105,7 @@ for secret_key in wordlist:
     print(cookie)
 ```
 Output:
+
 `
 butter
 {'very_auth': 'snickerdoodle'}
@@ -133,10 +134,9 @@ print(URLSafeTimedSerializer(
 
 ```
 
-`
-eyJ2ZXJ5X2F1dGgiOiJhZG1pbiJ9.Y4We0g.Cpg8E8mSastFPqOfoJnhhk4Im70
 
-`
+`eyJ2ZXJ5X2F1dGgiOiJhZG1pbiJ9.Y4We0g.Cpg8E8mSastFPqOfoJnhhk4Im70`
+
 
 9. Now we need to paste this JWT token as value in the cookie in session value and we will get out flag.
 
