@@ -1,6 +1,6 @@
 # Client-Side-Again  → 200 Pts.
 
-1. We have a login page in front of us and just like last time we can just fuzz the sources and we can see that we have a file index file 
+1. We have a login page in front of us and just like last time we can just fuzz the sources and we can see that we have a file _index_ file 
 
 ```jsx
 <script type = "text/javascript" >
@@ -48,13 +48,14 @@ alert(_0x4b5b('0x8'));
 `
 
 `
-💡  '0a029}', '_again_5’
-
+  '0a029}', '_again_5’
 `
+
 What if we can arrange them?
 
-`picoCTF{not_this_again_50a029}
-
 `
+picoCTF{not_this_again_50a029}
+`
+
 
 4. There we go our flag is here.
