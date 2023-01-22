@@ -1,5 +1,7 @@
 # Most Cookies → 150 Pts.
 
+## Huge Help from 0xManan, it wouldn't be possible for me to do it alone. Arigatoo Senpaii 😉
+
 1. We have a same cookie page as the last one (more cookies)
 
 2. We write _snickerdoodle_ and get our cookie in an encrypted format.
@@ -144,3 +146,5 @@ print(URLSafeTimedSerializer(
 
 
 Note: For every user the flag will be different.
+
+## MADSTACKS being MADSTACKS
