@@ -62,3 +62,6 @@ picoCTF{moooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo0o}
 ```
 
 7. There we have it…our flag.
+
+
+## It was a notorious challenge, as it required us to use our pre gained knowledge of JS and web files.
