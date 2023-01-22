@@ -1,12 +1,18 @@
 # More cookies  →  90 Pts.
 
 1. We need an admin rights to view the cookie.
-2. Inspected the page -> Applications -> Cookie was saved as "auth_name" and then the value: a3c0ZTZtN1pRYTRKdkVmSXhKTit6bmdLWWgyaXYzZlZwcFZXQ3FWaE5QSzJKWTBBVVNRQ2FDS2d0Zk1USlUxa2M5djNnYnpwNEJjNitIZElLNU9mQXJyaForajRKdnhJYnhoOFRGSUFqbjYzZ0h4ZlEzUFBNcTU1Qks5WXlaUW0=
+
+2. Inspected the page -> Applications -> Cookie was saved as "auth_name" and then the value: 
+
+`a3c0ZTZtN1pRYTRKdkVmSXhKTit6bmdLWWgyaXYzZlZwcFZXQ3FWaE5QSzJKWTBBVVNRQ2FDS2d0Zk1USlUxa2M5djNnYnpwNEJjNitIZElLNU9mQXJyaForajRKdnhJYnhoOFRGSUFqbjYzZ0h4ZlEzUFBNcTU1Qks5WXlaUW0=`
+
 3. We need to decode this then and only then we will get the flag.
+
 4. The algorithm used here is CBC and according to that we need to find. (googled the answer as I didn't knew how to handle cookies with admin privilege)
+
 5. Found a script on GitHub for decoding the code.
 
-``` bash
+``` python
 import requests
 import base64
 
@@ -32,4 +38,5 @@ break
 ```
 
 6. After running this script we will get our Flag in the output.
-7. What this script does is that it gets the cookies info from the provided site, decode the cookie to base64 and then uses the concept of CBC to flip the IV bit and loop it.
+
+Note: What this script does is that it gets the cookies info from the provided site, decode the cookie to base64 and then uses the concept of CBC to flip the IV bit and loop it.
