@@ -23,3 +23,7 @@ The writeups assume that you have a basic understanding of cybersecurity concept
 ## Contributing
 
 If you notice any errors or inaccuracies in the writeups, or if you have a better solution to a particular challenge, feel free to contribute to this repository by submitting a pull request. Please follow the guidelines in the CONTRIBUTING.md file.
+
+## License
+
+This repository is licensed under the MIT License - see the LICENSE file for details.
